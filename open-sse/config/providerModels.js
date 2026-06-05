@@ -152,12 +152,13 @@ export const PROVIDER_MODELS = {
     { id: "efficient", name: "Qoder Efficient" },
     { id: "lite", name: "Qoder Lite" },
     // Frontier models — pin a specific backing model
-    { id: "qmodel", name: "Qwen 3.6 Plus (Qoder)" },
+    { id: "qmodel", name: "Qwen3.7 Plus (Qoder)" },
+    { id: "qmodel_latest", name: "Qwen3.7 Max (Qoder)" },
     { id: "dmodel", name: "DeepSeek V4 Pro (Qoder)" },
     { id: "dfmodel", name: "DeepSeek V4 Flash (Qoder)" },
     { id: "gm51model", name: "GLM 5.1 (Qoder)" },
     { id: "kmodel", name: "Kimi K2.6 (Qoder)" },
-    { id: "mmodel", name: "MiniMax M2.7 (Qoder)" },
+    { id: "mmodel", name: "MiniMax M3 (Qoder)" },
   ],
   cu: [  // Cursor IDE
     { id: "default", name: "Auto (Server Picks)" },

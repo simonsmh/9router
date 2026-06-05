@@ -124,9 +124,9 @@ function truncate(s, n) {
  * Map the OpenAI-style request body into the exact shape Qoder expects.
  */
 async function buildQoderRequestBody({ model, body, credentials, log, proxyOptions, signal }) {
-  const qoderKey = String(model || "").replace(/^qoder\//, "");
-  if (!QODER_MODEL_MAP[qoderKey]) {
-    throw new Error(`Unsupported qoder model: "${qoderKey}" (received "${model}")`);
+  let qoderKey = String(model || "").replace(/^qoder\//, "");
+  if (QODER_MODEL_MAP[qoderKey]) {
+    qoderKey = QODER_MODEL_MAP[qoderKey];
   }
 
   let modelConfig = await getQoderModelConfig(credentials, qoderKey, { log, proxyOptions, signal });
@@ -136,9 +136,7 @@ async function buildQoderRequestBody({ model, body, credentials, log, proxyOptio
     const refreshed = await resolveQoderModels(credentials, { forceRefresh: true, log, proxyOptions, signal });
     const retried = refreshed?.rawConfigs.get(qoderKey);
     if (!retried) {
-      throw new Error(
-        `qoder: model_config for "${qoderKey}" not yet known (run a model list fetch or check upstream connectivity)`,
-      );
+      throw new Error(`Unsupported qoder model: "${qoderKey}" (received "${model}")`);
     }
     modelConfig = { ...retried, key: qoderKey };
   }
